@@ -16,21 +16,14 @@ typedef struct
 typedef struct
 {
     char q1[100];
-    int r1;
+    int r[8];
     char q2[100];
-    int r2;
-    char q3[100];
-    int r3;
+    char q3[100];  
     char q4[100];
-    int r4;
-    char q5[100];
-    int r5;
-    char q6[100];
-    int r6;
+    char q5[150];
+    char q6[150];
     char q7[100];
-    int r7;
     char q8[100];
-    int r8;
 
 }quetionario;
 
@@ -40,7 +33,9 @@ int realizarCadastro(empresa *user); //pasagem por referencia
 void apresentarMenu(empresa user, quetionario questoes); //pasagem por valor
 void apresentarCadastro(empresa user);
 void realizarQuestinario(quetionario questoes);
-
+void PesquisaSim(quetionario q);
+void PesquisaNao(quetionario q);
+void MenuBusca(quetionario q);
 
 
 //---------------------------------------------------------main
@@ -171,29 +166,83 @@ void realizarQuestinario(quetionario questoes){
     strcpy(questoes.q7,"7- Sua empresa possui uma produção que diversifica a insústria e/ou agrega valor às commodities?");
     strcpy(questoes.q8,"8- Sua empresa conseguiu aumentar o acesso universal às tecnologias que produzem até 2020?");
     
-    printf("\n\tquestionari sobre ODS\n obs: responda as questões com (1)pra SIM ou (0)pra NÃO\n");
+    printf("\n\tquestionario sobre ODS\n obs: responda as questões com (1)pra SIM ou (0)pra NÃO\n");
     puts(questoes.q1);
-    scanf("%d", &questoes.r1);
-
+    scanf("%d", &questoes.r[0]);
+    
+    
     puts(questoes.q2);
-    scanf("%d", &questoes.r2);
-
+    scanf("%d", &questoes.r[1]);
+    
+    
     puts(questoes.q3);
-    scanf("%d", &questoes.r3);
+    scanf("%d", &questoes.r[2]);
+    
     
     puts(questoes.q4);
-    scanf("%d", &questoes.r4);
+    scanf("%d", &questoes.r[3]);
+    
 
     puts(questoes.q5);
-    scanf("%d", &questoes.r5);
+    scanf("%d", &questoes.r[4]);
+    
 
     puts(questoes.q6);
-    scanf("%d", &questoes.r6);
-
+    scanf("%d", &questoes.r[5]);
+    
     puts(questoes.q7);
-    scanf("%d", &questoes.r7);
-
+    scanf("%d", &questoes.r[6]);
+    
+    
     puts(questoes.q8);
-    scanf("%d", &questoes.r8);
+    scanf("%d", &questoes.r[7]);
+   
+     MenuBusca(questoes);
 
+}
+void PesquisaSim(quetionario q){
+	int soma = 0, i;
+	for(i=0;i<8;i++){
+	if(q.r[i] == 1){
+		soma ++;
+	}
+	}
+	printf("\t%d Perguntas foram respondidas com sim\n\n", soma);
+
+}
+void PesquisaNao(quetionario q){
+	int soma = 0, i;
+	for(i=0;i<8;i++){
+	if(q.r[i] == 0){
+		soma ++;
+	}
+	}
+	printf("\t%d Perguntas foram respondidas com nao\n\n", soma);
+
+}
+
+void MenuBusca(quetionario q){
+	int op;
+	do{
+	printf("\tMenu  \n");
+	printf("\n 1- Buscar a quantidade de Respostas Sim");
+	printf("\n 2- Pesquisar a quantidade de Respostas Nao");
+	printf("\n 0- Sair\n\n");
+	scanf("%d", &op);
+	
+	switch(op){
+		case 1:
+			PesquisaSim(q);
+			break;
+		case 2:
+			PesquisaNao(q);
+			break;
+		case 0:
+			printf("\nsaindo!!\n\n");
+			break;
+		default:
+			printf("\nopcao invalida\n");
+	}
+	
+}	while(op != 0);
 }
