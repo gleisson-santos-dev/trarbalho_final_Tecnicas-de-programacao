@@ -43,7 +43,7 @@ void manipulaArquivo(empresa *user, quetionario questoes, FILE *arquivo);
 int main()
 {
     // idioma
-    setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "portuguese");
 
     empresa user;
     quetionario questoes;
@@ -63,8 +63,8 @@ void apresentarMenu(empresa user, quetionario questoes, FILE *arquivo)
 
     do
     {
-        printf("\tmenu\n");
-        printf("1- cadstrar empresa.\n0- sair\n");
+        printf("\tMENU\n");
+        printf("1- Cadastrar empresa\n0- sair\n");
         scanf("%d", &op);
 
         switch (op)
@@ -78,7 +78,7 @@ void apresentarMenu(empresa user, quetionario questoes, FILE *arquivo)
             break;
 
         default:
-            printf("opcao invalida\n");
+            printf("opção inválida\n");
             break;
         }
 
@@ -89,7 +89,7 @@ void apresentarMenu(empresa user, quetionario questoes, FILE *arquivo)
         do
         {
             printf("\tmenu\n");
-            printf("1- responder questionario.\n2- conferir cadastro\n0- sair\n");
+            printf("1- Responder questionário\n2- Conferir cadastro\n0- sair\n");
             scanf("%d", &op);
 
             switch (op)
@@ -106,7 +106,7 @@ void apresentarMenu(empresa user, quetionario questoes, FILE *arquivo)
                 break;
 
             default:
-                printf("opcao invalida\n");
+                printf("opção inválida\n");
                 break;
             }
 
@@ -114,7 +114,7 @@ void apresentarMenu(empresa user, quetionario questoes, FILE *arquivo)
     }
     else if (situacao_cadastro == 0)
     {
-        printf("\npara continuar e necesario realizar o cadastro\n.");
+        printf("\nPara continuar é necesario realizar o cadastro\n.");
         apresentarMenu(user, questoes, arquivo);
     }
 }
@@ -125,17 +125,17 @@ int realizarCadastro(empresa *user)
     user->razaoSocial = malloc(150 * sizeof(char));
     user->setorDeAtuacao = malloc(50 * sizeof(char));
 
-    printf("qual o nome da sua empresa?\n");
+    printf("Qual o nome da sua empresa?\n");
     setbuf(stdin, NULL);
     fgets(user->NomeDaEmpresa, 100, stdin);
 
     printf("qual o CNPJ da sua empresa?\n");
     scanf("%d", &user->CNPJ);
 
-    printf("qual o numero de funcionarios da sua empresa?\n");
+    printf("qual o número de funcionários da sua empresa?\n");
     scanf("%d", &user->numeroDeFuncionarios);
 
-    printf("qual a razao social da sua empresa?\n");
+    printf("qual a razão social da sua empresa?\n");
     setbuf(stdin, NULL);
     fgets(user->razaoSocial, 150, stdin);
 
@@ -150,26 +150,26 @@ int realizarCadastro(empresa *user)
 
 void apresentarCadastro(empresa user)
 {
-    printf("\tnome: %s\n", user.NomeDaEmpresa);
+    printf("\nNome da empresa: %s\n", user.NomeDaEmpresa);
     printf("CNPJ: %d\n", user.CNPJ);
-    printf("numero de funcionarios: %d\n", user.numeroDeFuncionarios);
-    printf("razao social: %s", user.razaoSocial);
+    printf("número de funcionários: %d\n", user.numeroDeFuncionarios);
+    printf("razão social: %s", user.razaoSocial);
     printf("sertor: %s\n", user.setorDeAtuacao);
 }
 
 int realizarQuestinario(quetionario questoes, FILE *arquivo)
 {
 
-    strcpy(questoes.q1, "1- Sua empresa traz meios de qualidade e seguranca em seus servicos para o usuario?");
-    strcpy(questoes.q2, "2- Sua empresa tem estimativas para expandir suas operacoes para paises subdesenvolvidos?");
+    strcpy(questoes.q1, "1- Sua empresa traz meios de qualidade e segurança em seus serviços para o usuário?");
+    strcpy(questoes.q2, "2- Sua empresa tem estimativas para expandir suas operações para países subdesenvolvidos?");
     strcpy(questoes.q3, "3- Sua empresa tem algum programa para desenvolvimento de empresas de pequeno porte e/ou startups?");
     strcpy(questoes.q4, "4- Sua empresa possui algum projeto para reduzir ao maximo os danos ao meio ambiente ate 2030?");
-    strcpy(questoes.q5, "5- Sua empresa possui alguma parceira publico/privada o para alavancar as pesquisas cientificas na sua area de atuacao?");
-    strcpy(questoes.q6, "6- Sua empresa possui projetos de cunho tecnico para ajudar paises com baixo desenvolvimento tecnologico?");
-    strcpy(questoes.q7, "7- Sua empresa possui uma producao que diversifica a industria e/ou agrega valor as commodities?");
+    strcpy(questoes.q5, "5- Sua empresa possui alguma parceira público/privada o para alavancar as pesquisas científicas na sua area de atuação?");
+    strcpy(questoes.q6, "6- Sua empresa possui projetos de cunho técnico para ajudar países com baixo desenvolvimento tecnológico?");
+    strcpy(questoes.q7, "7- Sua empresa possui uma produção que diversifica a indústria e/ou agrega valor às commodities?");
     strcpy(questoes.q8, "8- Sua empresa conseguiu aumentar o acesso universal as tecnologias que produzem ate 2020?");
 
-    printf("\n\tquestionario sobre ODS\n obs: responda as questoes com (1)pra SIM ou (0)pra Nao\n");
+    printf("\n\tquestionário sobre ODS\n obs: responda as questoes com (1)pra SIM ou (0)pra Não\n");
 
     puts(questoes.q1);
     scanf("%d", &questoes.r[0]);
@@ -195,36 +195,35 @@ int realizarQuestinario(quetionario questoes, FILE *arquivo)
     puts(questoes.q8);
     scanf("%d", &questoes.r[7]);
 
-    //------------gambiara-----------------------------------
     arquivo = fopen("resultado.txt", "w+");
-    fprintf(arquivo, "respostas do questionario\n");
+    fprintf(arquivo, "respostas do questionário\n");
 
-    fprintf(arquivo, "(perqunta): %s\n", questoes.q1);
+    fprintf(arquivo, "(pergunta): %s\n", questoes.q1);
     questoes.r[0] == 0 ? fprintf(arquivo, "respota: Sim\n") : fprintf(arquivo, "resposta: Não\n");
 
-    fprintf(arquivo, "(perqunta): %s\n", questoes.q2);
+    fprintf(arquivo, "(pergunta): %s\n", questoes.q2);
     questoes.r[1] == 0 ? fprintf(arquivo, "respota: Sim\n") : fprintf(arquivo, "resposta: Não\n");
 
-    fprintf(arquivo, "(perqunta): %s\n", questoes.q3);
+    fprintf(arquivo, "(pergunta): %s\n", questoes.q3);
     questoes.r[2] == 0 ? fprintf(arquivo, "respota: Sim\n") : fprintf(arquivo, "resposta: Não\n");
 
-    fprintf(arquivo, "(perqunta): %s\n", questoes.q4);
+    fprintf(arquivo, "(pergunta): %s\n", questoes.q4);
     questoes.r[3] == 0 ? fprintf(arquivo, "respota: Sim\n") : fprintf(arquivo, "resposta: Não\n");
 
-    fprintf(arquivo,"(perqunta): %s\n", questoes.q5);
+    fprintf(arquivo,"(pergunta): %s\n", questoes.q5);
     questoes.r[4]==0 ? fprintf(arquivo,"respota: Sim\n") : fprintf(arquivo,"resposta: Não\n");
 
-    fprintf(arquivo,"(perqunta): %s\n", questoes.q6);
+    fprintf(arquivo,"(pergunta): %s\n", questoes.q6);
     questoes.r[5]==0 ? fprintf(arquivo,"respota: Sim\n") : fprintf(arquivo,"resposta: Não\n");
 
-    fprintf(arquivo,"(perqunta): %s\n", questoes.q7);
+    fprintf(arquivo,"(pergunta): %s\n", questoes.q7);
     questoes.r[6]==0 ? fprintf(arquivo,"respota: Sim\n") : fprintf(arquivo,"resposta: Não\n");
 
-    fprintf(arquivo,"(perqunta): %s\n", questoes.q8);
+    fprintf(arquivo,"(pergunta): %s\n", questoes.q8);
     questoes.r[7]==0 ? fprintf(arquivo,"respota: Sim\n") : fprintf(arquivo,"resposta: Não\n");
 
     fclose(arquivo);
-    //----------------------------fim da gambiara-------------
+
 
     MenuBusca(questoes);
 }
@@ -250,7 +249,7 @@ void PesquisaNao(quetionario q)
             soma++;
         }
     }
-    printf("\t%d Perguntas foram respondidas com nao\n\n", soma);
+    printf("\t%d Perguntas foram respondidas com não\n\n", soma);
 }
 
 void MenuBusca(quetionario q)
@@ -260,7 +259,7 @@ void MenuBusca(quetionario q)
     {
         printf("\tMenu  \n");
         printf("\n 1- Buscar a quantidade de Respostas Sim");
-        printf("\n 2- Pesquisar a quantidade de Respostas Nao");
+        printf("\n 2- Buscar a quantidade de Respostas Não");
         printf("\n 0- Sair\n\n");
         scanf("%d", &op);
 
@@ -276,7 +275,7 @@ void MenuBusca(quetionario q)
             printf("\nsaindo!!\n\n");
             break;
         default:
-            printf("\nopcao invalida\n");
+            printf("\nopção inválida\n");
         }
 
     } while (op != 0);
@@ -286,12 +285,12 @@ void manipulaArquivo(empresa *user, quetionario questoes, FILE *arquivo)
 {
     arquivo = fopen("resultado.txt", "a+");
     rewind(arquivo);
-    fprintf(arquivo, "\nDados da empresa.\n\n");
+    fprintf(arquivo, "\tDados da empresa\n\n");
 
-    fprintf(arquivo, "nome: %s", user->NomeDaEmpresa);
+    fprintf(arquivo, "Nome: %s", user->NomeDaEmpresa);
     fprintf(arquivo, "CNPJ: %d\n", user->CNPJ);
-    fprintf(arquivo, "numero de funcionarios: %d\n", user->numeroDeFuncionarios);
-    fprintf(arquivo, "razao social: %s", user->razaoSocial);
+    fprintf(arquivo, "número de funcionários: %d\n", user->numeroDeFuncionarios);
+    fprintf(arquivo, "razão social: %s", user->razaoSocial);
     fprintf(arquivo, "sertor: %s\n", user->setorDeAtuacao);
 
     fclose(arquivo);
